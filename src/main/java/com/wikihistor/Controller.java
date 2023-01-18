@@ -33,10 +33,16 @@ public class Controller {
 
     public void saveArticle(Article article, String categoryName){
         Category categoryOfTheArticle = this.getCategoryOrCreate(categoryName); //Bierze kategorię lub dodaje jeśli takiej nie ma
-       // article.setCategory(categoryOfTheArticle);
-        categoryRepository.findCategoryByCategoryName(categoryName).addArticle(article); //powinno dodawać artykuł do kategorii. Nie dodaje.
+       article.setCategory(categoryOfTheArticle);
+       //categoryRepository.findCategoryByCategoryName(categoryName).addArticle(article); //powinno dodawać artykuł do kategorii. Nie dodaje.
         articleRepository.save(article);
+        var articleWithId = articleRepository.findArticleByTitle(article.getTitle());
+        var category = categoryRepository.findCategoryByCategoryName(articleWithId.getCategory().getCategoryName());
+        category.addArticle(articleWithId);
+        categoryRepository.save(category);
+        //categoryRepository.findCategoryByCategoryName(categoryName).addArticle(articleRepository.findArticleByTitle(article.getTitle()));
     }
+
 
 
     public String display() {

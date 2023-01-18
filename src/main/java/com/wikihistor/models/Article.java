@@ -19,7 +19,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="category_name")
     private Category category;
     @Column(columnDefinition = "TEXT")
@@ -35,8 +35,4 @@ public class Article {
         this.content = content;
     }
 
-
-    public String toSummaryString() {
-       return "Article(" + id + "){, title='" + title + '\'' + ", category='" + category + '\'' + '}';
-    }
 }

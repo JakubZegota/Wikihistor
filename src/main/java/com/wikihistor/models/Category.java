@@ -1,5 +1,6 @@
 package com.wikihistor.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wikihistor.WebController;
 import com.wikihistor.models.Article;
 import jakarta.persistence.*;
@@ -19,12 +20,13 @@ public class Category {
     @Id
     @NonNull
     private String categoryName;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnore
     private List<Article> articleList = new ArrayList<>();
 
     public void addArticle(Article article){
         articleList.add(article);
-        article.setCategory(this);
     }
+
 
 }

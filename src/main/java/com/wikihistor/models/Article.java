@@ -1,5 +1,6 @@
 package com.wikihistor.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@ToString
 @NoArgsConstructor
 @Table
 @Entity
@@ -19,8 +19,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    @ManyToOne
-    @JoinColumn(name="categoryName")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_name")
     private Category category;
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -34,6 +34,7 @@ public class Article {
         this.category = category;
         this.content = content;
     }
+
 
     public String toSummaryString() {
        return "Article(" + id + "){, title='" + title + '\'' + ", category='" + category + '\'' + '}';

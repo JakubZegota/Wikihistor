@@ -20,13 +20,13 @@ public class Category {
     @Id
     @NonNull
     private String categoryName;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "category") //mappedby
     @JsonIgnore
     private List<Article> articleList = new ArrayList<>();
 
     public void addArticle(Article article){
+        article.setCategory(this);
         articleList.add(article);
     }
-
 
 }

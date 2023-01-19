@@ -3,8 +3,6 @@ package com.wikihistor;
 
 import com.wikihistor.models.Article;
 import com.wikihistor.models.Category;
-import com.wikihistor.repositories.ArticleRepository;
-import com.wikihistor.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +16,7 @@ import java.util.Optional;
 @RestController
 public class WebController {
 
-    private final Controller controller;
+    private final ArticleService controller;
 
     @GetMapping("/categories")
     List<Category> findAllCategories() {return controller.getCategoryRepository().findAll();}

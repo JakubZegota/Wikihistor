@@ -19,8 +19,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    @ManyToOne()
-    @JoinColumn(name="category_name")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -29,10 +28,10 @@ public class Article {
         this.title = title;
         this.content = content;
     }
-    public Article(String title, Category category, String content) {
-        this.title = title;
-        this.category = category;
-        this.content = content;
-    }
+//    public Article(String title, Category category, String content) {
+//        this.title = title;
+//        this.category = category;
+//        this.content = content;
+//    }
 
 }

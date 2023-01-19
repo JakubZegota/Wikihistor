@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class TestRepository implements CommandLineRunner {
 
     @Autowired
-    private Controller controller;
+    private ArticleService controller;
 
     @Override
     public void run(String... args) throws Exception {

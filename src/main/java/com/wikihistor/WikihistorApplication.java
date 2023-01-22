@@ -10,4 +10,15 @@ public class WikihistorApplication {
         SpringApplication.run(WikihistorApplication.class, args);
     }
 
+    /*
+    to add:
+    - CategoryMapper List<Article> to List<String> converter.
+    - Mapping from entities to dto in WebController
+    - Adding User, UserDTO, and UserMapper
+    - Some frontend view
+    - Fetching data from wikipedia
+
+
+     */
+
 }

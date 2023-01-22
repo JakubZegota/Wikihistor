@@ -19,10 +19,10 @@ import java.util.List;
 public class Category {
     @Id
     @NonNull
-    private String categoryName;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "category") //mappedby
+    private String categoryName; //Name of the category, e.g. "biology", "chemistry"
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "category")
     @JsonIgnore
-    private List<Article> articleList = new ArrayList<>();
+    private List<Article> articleList = new ArrayList<>(); //list of the articles withing that category
 
     public void addArticle(Article article){
         article.setCategory(this);

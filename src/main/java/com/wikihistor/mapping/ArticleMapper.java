@@ -14,7 +14,7 @@ public class ArticleMapper implements IMapEntities<ArticleDTO, Article> {
         article.setId(articleDTO.getId());
         article.setContent(articleDTO.getContent());
         article.setTitle(articleDTO.getTitle());
-        return article; //leaves Category Field as null. Handled in the service class.
+        return article; //leaves Category Field as null. It needs to be handled in the service class.
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ArticleMapper implements IMapEntities<ArticleDTO, Article> {
         articleDTO.setId(article.getId());
         articleDTO.setContent(article.getContent());
         articleDTO.setTitle(article.getTitle());
-        articleDTO.setCategoryName(article.getCategory().getCategoryName());
+        articleDTO.setCategoryName(article.getCategory().getCategoryName()); //converts Category type into category name of type String.
         return articleDTO;
     }
 

@@ -17,12 +17,12 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String title;
+    private Long id; //Id of the article, generated automatically.
+    private String title; //Title of the article.
     @ManyToOne(fetch = FetchType.EAGER)
-    private Category category;
+    private Category category; //Category of the article, e.g. biology, chemistry etc.
     @Column(columnDefinition = "TEXT")
-    private String content;
+    private String content; //Content of the article: definition, examples etc.
 
     public Article(String title, String content){
         this.title = title;

@@ -11,5 +11,5 @@ import java.util.List;
 @Setter
 public class CategoryDTO {
     private String categoryName;
-    private List<String> articleNames;
+    private List<String> articleNames; //Converted from List<Article>. Needs a mechanism to convert it back.
 }

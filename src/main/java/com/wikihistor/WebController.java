@@ -1,8 +1,9 @@
 package com.wikihistor;
 
 
+import com.wikihistor.mapping.ArticleDTO;
+import com.wikihistor.mapping.CategoryDTO;
 import com.wikihistor.models.Article;
-import com.wikihistor.models.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,18 +17,16 @@ import java.util.Optional;
 @RestController
 public class WebController {
 
-    private final ArticleService controller;
+    private final CategoryService categoryService;
+    private final ArticleService articleService;
 
     @GetMapping("/categories")
-    List<Category> findAllCategories() {return controller.getCategoryRepository().findAll();}
+    List<CategoryDTO> findAllCategories() {return categoryService.getCategoriesDTO();}
 
     @GetMapping("/articles/{id}")
-    Optional<Article> findArticleById(@PathVariable("id") long id) {return controller.getArticleRepository().findById(id);}
+    ArticleDTO findArticleById(@PathVariable("id") long id) {return articleService.getArticleDTOById(id);}
 
     @GetMapping("/articles")
-    List<Article> findAll() {return controller.getArticleRepository().findAll();}
-
-    @GetMapping("/show")
-    String show() {return controller.display();}
+    List<ArticleDTO> findAll() {return articleService.getArticlesDTO();}
 
 }

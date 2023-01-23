@@ -12,9 +12,12 @@ public class WikihistorApplication {
 
     /*
     to add:
-    - CategoryMapper List<Article> to List<String> converter.
-    - Mapping from entities to dto in WebController
+    - Category Service is Present
+    - Article Service is Present
+    - Mapping from entities to dto in WebController ???
     - Adding User, UserDTO, and UserMapper
+    - Adding new Articles
+    - Searching articles from wikipedia
     - Some frontend view
     - Fetching data from wikipedia
 

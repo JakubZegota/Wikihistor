@@ -1,6 +1,10 @@
 package com.wikihistor.mapping;
 
+import com.wikihistor.models.Article;
 import com.wikihistor.models.Category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryMapper implements IMapEntities<CategoryDTO, Category> {
     @Override
@@ -22,6 +26,11 @@ public class CategoryMapper implements IMapEntities<CategoryDTO, Category> {
     @Override
     public CategoryDTO mapToDTO(Category category, CategoryDTO categoryDTO) {
         categoryDTO.setCategoryName(category.getCategoryName());
-        return categoryDTO; //Lacks List<Article> data. Needs to be added.
+        List<String> articleNames = new ArrayList<>();
+        for (Article article : category.getArticleList()){
+            articleNames.add(article.getTitle());
+        }
+        categoryDTO.setArticleNames(articleNames);
+        return categoryDTO;
     }
 }

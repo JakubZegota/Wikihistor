@@ -1,51 +1,37 @@
 package com.wikihistor;
 
+import com.wikihistor.mapping.ArticleDTO;
+import com.wikihistor.mapping.ArticleMapper;
 import com.wikihistor.models.Article;
-import com.wikihistor.models.Category;
 import com.wikihistor.repositories.ArticleRepository;
-import com.wikihistor.repositories.CategoryRepository;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 @Getter
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ArticleService {
-
+    @NonNull
     private final ArticleRepository articleRepository;
-    private final CategoryRepository categoryRepository;
+    private final ArticleMapper articleMapper = new ArticleMapper();
 
-    public Category getCategoryOrCreate(String name) { //gets category by name or creates it if it does not exist
-        return categoryRepository.findCategoryByCategoryName(name).orElseGet(() -> categoryRepository.save(new Category(name)));
+
+    public ArticleDTO getArticleDTOById(long id){
+        var article = articleRepository.findById(id).get(); //should be isPresent???
+        return articleMapper.mapToDTO(article);
     }
 
-    public void saveArticle(Article article, String categoryName) { //saves article and updates the category associated with it
-        Category categoryOfTheArticle = this.getCategoryOrCreate(categoryName);
-        article.setCategory(categoryOfTheArticle);
-        categoryOfTheArticle.addArticle(article);
-        categoryRepository.save(categoryOfTheArticle);
-    }
-
-    public String display() { //displaying category and its articles in category={article1,article2} format
-        List<Category> categoryList = this.categoryRepository.findAll();
-        StringBuilder stringBuilder1 = new StringBuilder();
-
-        for (Category category : categoryList) {
-            stringBuilder1.append(category.getCategoryName());
-            stringBuilder1.append("={");
-            StringJoiner joiner = new StringJoiner(",");
-            for (Article article : category.getArticleList()) {
-                joiner.add(article.getTitle());
-            }
-            stringBuilder1.append(joiner.toString());
-            stringBuilder1.append("}");
+    public List<ArticleDTO> getArticlesDTO(){
+        List<ArticleDTO> articleDTOList = new ArrayList<>();
+        for (Article article : articleRepository.findAll()){
+            articleDTOList.add(articleMapper.mapToDTO(article));
         }
-        return stringBuilder1.toString();
+        return articleDTOList;
     }
+
 }

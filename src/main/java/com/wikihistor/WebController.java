@@ -20,6 +20,9 @@ public class WebController {
     private final CategoryService categoryService;
     private final ArticleService articleService;
 
+    @GetMapping("wikipedia/{searchphrase}")
+    String searchForWikiarticle(){ return "search";}
+
     @GetMapping("/categories")
     List<CategoryDTO> findAllCategories() {return categoryService.getCategoriesDTO();}
 

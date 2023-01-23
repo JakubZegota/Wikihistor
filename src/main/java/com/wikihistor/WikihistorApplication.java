@@ -17,7 +17,6 @@ public class WikihistorApplication {
     - Mapping from entities to dto in WebController ???
     - Adding User, UserDTO, and UserMapper
     - Adding new Articles
-    - Searching articles from wikipedia
     - Some frontend view
     - Fetching data from wikipedia
 

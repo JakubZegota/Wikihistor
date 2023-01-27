@@ -7,7 +7,7 @@ public class SearcherTest {
 
     @Test
     void TestSearching(){
-        WikipediaSearcher wikipediaSearcher = new WikipediaSearcher("bee");
+        WikipediaSearcher wikipediaSearcher = new WikipediaSearcher("bem");
         var searchResults = wikipediaSearcher.searchForArticles();
         System.out.println(searchResults.displayTitles());
 

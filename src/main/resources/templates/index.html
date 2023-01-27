@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article List</title>
+</head>
+<body>
+<h1>List of Articles</h1>
+<ul>
+    <!--/*@thymesVar id="allArticleList" type="java.util.List"*/-->
+    <li th:each="article : ${allArticleList}">
+        <p th:text="${article.title}"></p>
+        <p th:text="${article.content}"></p>
+    </li>
+</ul>
+
+<form action="" th:action="@{/articles/add}">
+    <input type="submit" value="Add article" />
+</form>
+
+</body>
+
+</html>

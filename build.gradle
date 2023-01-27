@@ -21,6 +21,9 @@ repositories {
 dependencies {
 
 
+	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '2.0.5'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'

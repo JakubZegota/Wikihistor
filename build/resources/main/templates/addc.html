@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article List</title>
+</head>
+<body>
+<h1>List of categories</h1>
+<ul>
+
+    <li th:each="category : ${categories}">
+        <p th:text="${category.categoryName}"></p>
+<!--        <p th:text="${article.content}"></p>-->
+    </li>
+</ul>
+
+<form action="#" th:action="@{/addcategory}" th:object="${category}" method="post">
+    <label for="name">Category:</label>
+    <input type="text" id="name" th:field="*{categoryName}" required/>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+
+<form action="" th:action="@{/articles/add}">
+    <input type="submit" value="Go back" />
+</form>
+
+</body>
+
+</html>

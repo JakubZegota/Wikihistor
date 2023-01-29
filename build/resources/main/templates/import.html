@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<head>
+    <title>Import article</title>
+</head>
+<body>
+
+<form th:action="@{/import}" th:object="${phrase}" method="post">
+    <input type="text" name="phrase" placeholder="Search for articles">
+    <input type="submit" value="Search">
+</form>
+
+<h2>Search results:</h2>
+
+
+<div th:if="${searchResults}" th:each="result : ${searchResults}">
+    <p th:text="${result}"></p>
+</div>
+
+<form action="" th:action="@{/articles/add}">
+    <input type="submit" value="Go back" />
+</form>
+
+
+
+
+</body>
+</html>

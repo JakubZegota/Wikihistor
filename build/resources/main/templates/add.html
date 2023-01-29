@@ -13,17 +13,23 @@
     <textarea id="content" th:field="*{content}" required></textarea>
     <br>
     <h3>Select Category:</h3>
-<!--    <div th:each="category : ${categories}">-->
-<!--        <input type="checkbox" name="categoryName" th:value="${category.categoryName}" th:text="${category.categoryName}"/>-->
-<!--    </div>-->
+
     <div th:each="category : ${categories}">
         <input type="radio" name="categoryName" th:value="${category.categoryName}" th:text="${category.categoryName}" required/>
     </div>
 
+
     <br>
     <input type="submit" value="Submit"/>
 </form>
-
+<br>
+<form action="" th:action="@{/addcategory}">
+    <input type="submit" value="Add category" />
+</form>
+<form action="" th:action="@{/import}">
+    <input type="submit" value="Import article from Wikipedia" />
+</form>
+<br>
 <form action="" th:action="@{/articles}">
     <input type="submit" value="Go back" />
 </form>

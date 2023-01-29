@@ -1,4 +1,4 @@
-package com.wikihistor;
+package com.wikihistor.services;
 
 import com.wikihistor.mapping.ArticleMapper;
 import com.wikihistor.mapping.CategoryDTO;

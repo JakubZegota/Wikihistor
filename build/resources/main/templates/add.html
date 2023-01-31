@@ -4,6 +4,8 @@
     <title>Add Article</title>
 </head>
 <body>
+<div>You're currently logged in as user: <strong th:text="${loggedUser}"></strong></div>
+<br>
 <h1>Add an Article</h1>
 <form action="#" th:action="@{/articles/add}" th:object="${article}" method="post">
     <label for="title">Title:</label>

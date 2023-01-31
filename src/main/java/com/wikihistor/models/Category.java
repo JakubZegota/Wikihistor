@@ -1,11 +1,7 @@
 package com.wikihistor.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.wikihistor.WebController;
-import com.wikihistor.models.Article;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +15,9 @@ import java.util.List;
 public class Category {
     @Id
     @NonNull
-    private String categoryName; //Name of the category, e.g. "biology", "chemistry"
+    private String categoryName;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "category")
-    private List<Article> articleList = new ArrayList<>(); //list of the articles withing that category
+    private List<Article> articleList = new ArrayList<>();
 
     public void addArticle(Article article){
         article.setCategory(this);

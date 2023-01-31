@@ -1,9 +1,7 @@
-package com.wikihistor.mapping;
+package com.wikihistor.mapping.mappers;
 
-import com.wikihistor.models.Article;
+import com.wikihistor.mapping.WikiuserDTO;
 import com.wikihistor.models.Wikiuser;
-
-import java.util.stream.Collectors;
 
 public class WikiuserMapper implements IMapEntities<WikiuserDTO, Wikiuser> {
     @Override
@@ -24,9 +22,7 @@ public class WikiuserMapper implements IMapEntities<WikiuserDTO, Wikiuser> {
 
     @Override
     public WikiuserDTO mapToDTO(Wikiuser wikiuser, WikiuserDTO dto) {
-       dto.setLogin(wikiuser.getLogin());
-       dto.setArticleNames(wikiuser.getAssignedArticles().stream().map(Article::getTitle).collect(Collectors.toSet()));
-
-       return dto;
+        dto.setLogin(wikiuser.getLogin());
+        return dto;
     }
 }

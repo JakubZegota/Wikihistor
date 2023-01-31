@@ -3,16 +3,13 @@ package com.wikihistor.wikipedia;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wikihistor.models.Article;
-import lombok.AllArgsConstructor;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.Normalizer;
 
 
 public class ArticleImport {
-    private String title;
+    private final String title;
 
     public ArticleImport(String title) {
         var removeWhitespaces= title.replaceAll("\\s", "_");

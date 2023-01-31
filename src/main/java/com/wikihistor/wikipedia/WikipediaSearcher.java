@@ -1,11 +1,8 @@
 package com.wikihistor.wikipedia;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wikihistor.wikipedia.SearchResults;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

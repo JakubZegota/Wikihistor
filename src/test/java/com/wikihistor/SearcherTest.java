@@ -11,6 +11,5 @@ public class SearcherTest {
         var searchResults = wikipediaSearcher.searchForArticles();
         System.out.println(searchResults.displayTitles());
 
-
     }
 }

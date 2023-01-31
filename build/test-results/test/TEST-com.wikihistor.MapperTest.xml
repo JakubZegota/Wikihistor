@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.wikihistor.MapperTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-31T10:15:31" hostname="fedora" time="0.323">
+<testsuite name="com.wikihistor.MapperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-01-31T20:10:16" hostname="fedora" time="0.31">
   <properties/>
-  <testcase name="testUserMapper()" classname="com.wikihistor.MapperTest" time="0.323"/>
+  <testcase name="testCategoryMapper()" classname="com.wikihistor.MapperTest" time="0.307"/>
+  <testcase name="testArticleMapper()" classname="com.wikihistor.MapperTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

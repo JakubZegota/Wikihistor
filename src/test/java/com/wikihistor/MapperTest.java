@@ -1,8 +1,7 @@
 package com.wikihistor;
 
-import com.wikihistor.mapping.ArticleMapper;
-import com.wikihistor.mapping.CategoryMapper;
-import com.wikihistor.mapping.WikiuserMapper;
+import com.wikihistor.mapping.mappers.ArticleMapper;
+import com.wikihistor.mapping.mappers.CategoryMapper;
 import com.wikihistor.models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+
 
 @ExtendWith(MockitoExtension.class)
 public class MapperTest {
@@ -18,20 +17,17 @@ public class MapperTest {
     private ArticleMapper articleMapper;
     @InjectMocks
     private CategoryMapper categoryMapper;
-    @InjectMocks
-    private WikiuserMapper wikiuserMapper;
 
 
     @Test
-    void testArticleMapper() { //passed
+    void testArticleMapper() {
         var User = new Wikiuser("login", "password");
         var article = new Article("Article title", "Article content");
         article.setId(1L);
         article.setCategory(new Category("category"));
-        article.getAssignedWikiusers().add(User);
 
         var articleDTO = articleMapper.mapToDTO(article);
-        assertEquals("Article title",articleDTO.getTitle());
+        assertEquals("Article title", articleDTO.getTitle());
         assertEquals("Article content", articleDTO.getContent());
         assertEquals("category", articleDTO.getCategoryName());
 
@@ -42,7 +38,7 @@ public class MapperTest {
     }
 
     @Test
-    void testCategoryMapper() { //passed
+    void testCategoryMapper() {
         var category = new Category("Category name");
         var article = new Article("Article title", "Article content");
         article.setId(1L);
@@ -56,22 +52,6 @@ public class MapperTest {
 
 
     }
-
-    @Test
-    void testUserMapper(){
-        var user = new Wikiuser("login", "password");
-        var article = new Article("title", "content");
-        user.getAssignedArticles().add(article);
-
-        var userDTO = wikiuserMapper.mapToDTO(user);
-        assertEquals("login",userDTO.getLogin());
-
-        var user1 = wikiuserMapper.mapToEntity(userDTO);
-        assertEquals("login", user1.getLogin());
-
-    }
-
-
 
 
 }

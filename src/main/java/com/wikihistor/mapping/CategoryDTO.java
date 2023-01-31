@@ -1,7 +1,6 @@
 package com.wikihistor.mapping;
 
 import lombok.*;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -11,6 +10,5 @@ import java.util.List;
 public class CategoryDTO {
     @NonNull
     private String categoryName;
-    private List<String> articleNames; //Converted from List<Article>. Needs a mechanism to convert it back.
-    private List<String> userNames;
+    private List<String> articleNames;
 }

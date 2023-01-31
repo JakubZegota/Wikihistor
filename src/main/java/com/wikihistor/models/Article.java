@@ -5,10 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -18,20 +14,15 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; //Id of the article, generated automatically.
-    private String title; //Title of the article.
+    private Long id;
+    private String title;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Category category; //Category of the article, e.g. biology, chemistry etc.
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_assignedUsers")
-    private Set<Wikiuser> assignedWikiusers = new HashSet<>();
-
+    private Category category;
 
     @Column(columnDefinition = "TEXT")
-    private String content; //Content of the article: definition, examples etc.
+    private String content;
 
-    public Article(String title, String content){
+    public Article(String title, String content) {
         this.title = title;
         this.content = content;
     }

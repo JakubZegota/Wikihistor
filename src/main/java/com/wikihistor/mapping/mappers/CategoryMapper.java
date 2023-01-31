@@ -1,21 +1,21 @@
-package com.wikihistor.mapping;
+package com.wikihistor.mapping.mappers;
 
+import com.wikihistor.mapping.CategoryDTO;
 import com.wikihistor.models.Article;
 import com.wikihistor.models.Category;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryMapper implements IMapEntities<CategoryDTO, Category> {
     @Override
     public Category mapToEntity(CategoryDTO categoryDTO) {
-        return mapToEntity(categoryDTO,new Category());
+        return mapToEntity(categoryDTO, new Category());
     }
 
     @Override
     public Category mapToEntity(CategoryDTO categoryDTO, Category category) {
         category.setCategoryName(categoryDTO.getCategoryName());
-        return category; //List of article is a null. It needs to be handled in the service class.
+        return category;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CategoryMapper implements IMapEntities<CategoryDTO, Category> {
     public CategoryDTO mapToDTO(Category category, CategoryDTO categoryDTO) {
         categoryDTO.setCategoryName(category.getCategoryName());
         List<String> articleNames = new ArrayList<>();
-        for (Article article : category.getArticleList()){
+        for (Article article : category.getArticleList()) {
             articleNames.add(article.getTitle());
         }
         categoryDTO.setArticleNames(articleNames);

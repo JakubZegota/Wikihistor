@@ -4,28 +4,34 @@
     <title>Import article</title>
 </head>
 <body>
-
+<div>You're currently logged in as user: <strong th:text="${loggedUser}"></strong></div>
+<br>
 <form th:action="@{/import}" th:object="${phrase}" method="post">
     <input type="text" name="phrase" placeholder="Search for articles">
+    <input type="hidden" name="categoryName" value="default">
     <input type="submit" value="Search">
 </form>
 
 <h2>Search results:</h2>
 
-
 <form method="post" th:action="@{/import}">
     <div th:if="${searchResults}" th:each="result : ${searchResults}">
-        <input type="radio" id="result-radio" name="selectedResult" th:value="${result}" />
+        <input type="radio" id="result-radio" name="selectedResult" th:value="${result}"/>
         <label for="result-radio" th:text="${result}"></label><br>
     </div>
+
+    <div th:if="${searchResults}">
+        <select name="categoryName">
+            <option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}"></option>
+        </select>
+    </div>
+
     <input type="submit" value="Submit">
 </form>
 
 <form action="" th:action="@{/articles/add}">
-    <input type="submit" value="Go back" />
+    <input type="submit" value="Go back"/>
 </form>
-
-
 
 
 </body>

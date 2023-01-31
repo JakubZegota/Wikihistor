@@ -16,7 +16,7 @@ public class TestRepository implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+        this.controller.saveArticle(new Article("default", "default"), "default");
      this.controller.saveArticle(new Article("cell", "The cell is the basic structural and functional unit of life forms."), "biology");
      this.controller.saveArticle(new Article("polymer", "A substance or material consisting of very large molecules called macromolecules, composed of many repeating subunits."), "chemistry");
      this.controller.saveArticle( new Article("mammal", "A group of vertebrate animals characterized by the presence of mammary glands which in females produce milk."), "biology");

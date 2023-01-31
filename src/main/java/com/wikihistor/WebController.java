@@ -6,9 +6,8 @@ import com.wikihistor.models.Article;
 import com.wikihistor.models.Category;
 import com.wikihistor.services.ArticleService;
 import com.wikihistor.services.CategoryService;
-import com.wikihistor.wikipedia.SearchResults;
+import com.wikihistor.wikipedia.ArticleImport;
 import com.wikihistor.wikipedia.WikipediaSearcher;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,36 +24,12 @@ public class WebController {
     @NonNull
     private final ArticleService articleService;
 
-//
-//    @GetMapping("/")
-//    public String viewHomePage(Model model){
-//        model.addAttribute("allArticlesList",articleService.getArticlesDTO());
-//        return "index";
-//    }
-//
-//    @GetMapping("/addnew")
-//    public String addNewArticle(Model model){
-//        ArticleDTO article = new ArticleDTO();
-//        model.addAttribute("article", article);
-//        return "newarticle";
-//
-//    }
-
-//    @GetMapping("wikipedia/{searchphrase}")
-//    String searchForWikiarticle(){ return "search";}
-//
-//    @GetMapping("/categories")
-//    List<CategoryDTO> findAllCategories() {return categoryService.getCategoriesDTO();}
-//
-//    @GetMapping("/articles/{id}")
-//    ArticleDTO findArticleById(@PathVariable("id") long id) {return articleService.getArticleDTOById(id);}
 
     @GetMapping("/articles/add")
     public String addArticleForm(Article article, Model model) {
         model.addAttribute("categories", categoryService.getCategoriesDTO());
         return "add";
     }
-
 
     @PostMapping("articles/add")
     public String addArticle(Article article, @RequestParam("categoryName") String categoryName) {
@@ -70,24 +45,35 @@ public class WebController {
     }
 
     @GetMapping("addcategory")
-    public String addCategoryForm(Category category, Model model){
+    public String addCategoryForm(Category category, Model model) {
         model.addAttribute("categories", categoryService.getCategoriesDTO());
         return "addc";
     }
 
     @PostMapping("addcategory")
-    public String addCategory(Category category, @RequestParam("categoryName") String categoryName){
+    public String addCategory(Category category, @RequestParam("categoryName") String categoryName) {
         categoryService.getCategoryRepository().save(category);
         return "redirect:/articles/add";
     }
+
     @GetMapping("/import")
-    public String searchForm(Model model) {
+    public String searchForm() {
         return "import";
     }
 
     @PostMapping("/import")
-    public String searchSubmit(@RequestParam String phrase, Model model) {
-        model.addAttribute("searchResults", new WikipediaSearcher(phrase).searchForArticles().getTitles());
+    public String searchSubmit(@RequestParam(defaultValue = "") String phrase, Model model, @RequestParam(required = false) String selectedResult) {
+
+        if (selectedResult != null && !selectedResult.isEmpty()) {
+            model.addAttribute("selectedResult", selectedResult);
+            var article = new ArticleImport(selectedResult).searchForArticle();
+            article.setCategory(categoryService.getCategoryOrCreate("default"));
+            this.articleService.getArticleRepository().save(article);
+            return "redirect:/articles";
+        } else {
+            model.addAttribute("searchResults", new WikipediaSearcher(phrase).searchForArticles().getTitles());
+        }
+
         return "import";
     }
 }

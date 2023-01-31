@@ -13,9 +13,13 @@
 <h2>Search results:</h2>
 
 
-<div th:if="${searchResults}" th:each="result : ${searchResults}">
-    <p th:text="${result}"></p>
-</div>
+<form method="post" th:action="@{/import}">
+    <div th:if="${searchResults}" th:each="result : ${searchResults}">
+        <input type="radio" id="result-radio" name="selectedResult" th:value="${result}" />
+        <label for="result-radio" th:text="${result}"></label><br>
+    </div>
+    <input type="submit" value="Submit">
+</form>
 
 <form action="" th:action="@{/articles/add}">
     <input type="submit" value="Go back" />

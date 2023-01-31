@@ -2,6 +2,7 @@ package com.wikihistor;
 
 import com.wikihistor.mapping.ArticleMapper;
 import com.wikihistor.mapping.CategoryMapper;
+import com.wikihistor.mapping.WikiuserMapper;
 import com.wikihistor.models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,18 +18,23 @@ public class MapperTest {
     private ArticleMapper articleMapper;
     @InjectMocks
     private CategoryMapper categoryMapper;
+    @InjectMocks
+    private WikiuserMapper wikiuserMapper;
 
 
     @Test
     void testArticleMapper() { //passed
+        var User = new Wikiuser("login", "password");
         var article = new Article("Article title", "Article content");
         article.setId(1L);
         article.setCategory(new Category("category"));
+        article.getAssignedWikiusers().add(User);
 
         var articleDTO = articleMapper.mapToDTO(article);
         assertEquals("Article title",articleDTO.getTitle());
         assertEquals("Article content", articleDTO.getContent());
         assertEquals("category", articleDTO.getCategoryName());
+
         var article1 = articleMapper.mapToEntity(articleDTO);
         assertEquals("Article title", article1.getTitle());
         assertEquals("Article content", article1.getContent());
@@ -50,4 +56,22 @@ public class MapperTest {
 
 
     }
+
+    @Test
+    void testUserMapper(){
+        var user = new Wikiuser("login", "password");
+        var article = new Article("title", "content");
+        user.getAssignedArticles().add(article);
+
+        var userDTO = wikiuserMapper.mapToDTO(user);
+        assertEquals("login",userDTO.getLogin());
+
+        var user1 = wikiuserMapper.mapToEntity(userDTO);
+        assertEquals("login", user1.getLogin());
+
+    }
+
+
+
+
 }

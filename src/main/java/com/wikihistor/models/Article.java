@@ -1,11 +1,12 @@
 package com.wikihistor.models;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Setter
@@ -21,6 +22,12 @@ public class Article {
     private String title; //Title of the article.
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category; //Category of the article, e.g. biology, chemistry etc.
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="fk_assignedUsers")
+    private Set<Wikiuser> assignedWikiusers = new HashSet<>();
+
+
     @Column(columnDefinition = "TEXT")
     private String content; //Content of the article: definition, examples etc.
 
@@ -28,10 +35,5 @@ public class Article {
         this.title = title;
         this.content = content;
     }
-//    public Article(String title, Category category, String content) {
-//        this.title = title;
-//        this.category = category;
-//        this.content = content;
-//    }
 
 }

@@ -12,4 +12,5 @@ public class CategoryDTO {
     @NonNull
     private String categoryName;
     private List<String> articleNames; //Converted from List<Article>. Needs a mechanism to convert it back.
+    private List<String> userNames;
 }

@@ -6,6 +6,7 @@ import com.wikihistor.models.Article;
 import com.wikihistor.models.Category;
 import com.wikihistor.services.ArticleService;
 import com.wikihistor.services.CategoryService;
+import com.wikihistor.services.UserService;
 import com.wikihistor.wikipedia.ArticleImport;
 import com.wikihistor.wikipedia.WikipediaSearcher;
 import lombok.NonNull;
@@ -23,7 +24,14 @@ public class WebController {
     private final CategoryService categoryService;
     @NonNull
     private final ArticleService articleService;
+    @NonNull
+    private final UserService userService;
 
+    @GetMapping("/users")
+    public String chooseUser(Model model){
+        model.addAttribute("users", userService.getUsersDTO());
+        return "users";
+    }
 
     @GetMapping("/articles/add")
     public String addArticleForm(Article article, Model model) {

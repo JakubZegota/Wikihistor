@@ -1,6 +1,9 @@
 package com.wikihistor.mapping;
 
 import com.wikihistor.models.Article;
+import com.wikihistor.models.Wikiuser;
+
+import java.util.stream.Collectors;
 
 public class ArticleMapper implements IMapEntities<ArticleDTO, Article> {
 
@@ -14,7 +17,7 @@ public class ArticleMapper implements IMapEntities<ArticleDTO, Article> {
         article.setId(articleDTO.getId());
         article.setContent(articleDTO.getContent());
         article.setTitle(articleDTO.getTitle());
-        return article; //leaves Category Field as null. It needs to be handled in the service class.
+        return article; //leaves Category and Wikiuser fields as null. It needs to be handled in the service class.
     }
 
     @Override
@@ -28,6 +31,7 @@ public class ArticleMapper implements IMapEntities<ArticleDTO, Article> {
         articleDTO.setContent(article.getContent());
         articleDTO.setTitle(article.getTitle());
         articleDTO.setCategoryName(article.getCategory().getCategoryName()); //converts Category type into category name of type String.
+        articleDTO.setUserSet(article.getAssignedWikiusers().stream().map(Wikiuser::getLogin).collect(Collectors.toSet()));
         return articleDTO;
     }
 
